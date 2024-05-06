@@ -1,0 +1,53 @@
+/* for sizes */
+.header-btn,
+.experience-section {
+   margin-top: 70px;
+}
+
+.footer-contact_title,
+.footer-form {
+   width: 40%;
+}
+
+.main-project_logo,
+.profile-user {
+   width: 100%;
+}
+
+
+
+/* for fonts */
+.header-desc,
+.experience-cart_subtitle,
+.footer-subtitle {
+   color: var(--light-white);
+   font-feature-settings: 'clig' off, 'liga' off;
+   /* Body */
+   font-size: 18px;
+   font-weight: 500;
+   line-height: 28px;
+   /* 155.556% */
+}
+
+.header-title,
+.main-section_projects,
+.footer-title {
+   color: var(--white);
+   font-feature-settings: 'clig' off, 'liga' off;
+   /* Heading (XL) */
+   font-size: 88px;
+   font-weight: 700;
+   line-height: 88px;
+   /* 100% */
+   letter-spacing: -2.5px;
+}
+
+
+
+
+.main-section_title,
+.footer-user {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
