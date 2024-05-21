@@ -5,7 +5,7 @@ export default function Profile() {
     <div className="profile-section">
       <ContactLinks />
       <div className="profile-user">
-         <img src="/src/assets/images/portfolio-profile.png" alt="portfolio-profile.png" />
+         <img src="/src/portfolio-profile.png" alt="portfolio-profile.png" />
       </div>
     </div>
   )

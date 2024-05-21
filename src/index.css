@@ -73,7 +73,7 @@ button:disabled:hover{
 
 @font-face {
   font-family: "Space Grotesk";
-  src: url(/src/assets/font/space-grotesk/static/SpaceGrotesk-Regular.ttf);
+  src: url(/src/space-grotesk/static/SpaceGrotesk-Regular.ttf);
 }
 
 body {
@@ -98,7 +98,6 @@ body::-webkit-scrollbar {
   font-size: 32px;
   font-weight: 700;
   line-height: 32px;
-  /* 100% */
   letter-spacing: -0.444px;
 }
 .header {
