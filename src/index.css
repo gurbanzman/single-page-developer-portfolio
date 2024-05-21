@@ -73,7 +73,7 @@ button:disabled:hover{
 
 @font-face {
   font-family: "Space Grotesk";
-  src: url(/src/font/space-grotesk/static/SpaceGrotesk-Regular.ttf);
+  src: url(/src/assets/font/space-grotesk/static/SpaceGrotesk-Regular.ttf);
 }
 
 body {
@@ -338,12 +338,6 @@ body::-webkit-scrollbar {
   }
 }
 
-.footer-user{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .content{
   width: 50%;
   margin: 40px auto;
@@ -490,9 +484,64 @@ body::-webkit-scrollbar {
   font-size: 20px;
 }
 
+/* contact pages styles */
+.contact-main{
+  margin-top: 60px;
+}
+.contact-section_title{
+  color: var(--light-white);
+  font-size: 40px;
+}
+.contact-messages_name{
+  text-decoration: underline;
+}
+.contact-section_messages{
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.contact-messages{
+  width: 30%;
+}
+.contact-messages_title{
+  padding: 5px 10px;
+  background: var(--light-white);
+  border-radius: 10px 10px 0 0;
+}
+.contact-messages_title>.icon-android{
+  color: var(--light-black);
+  font-size: 20px;
+}
+.contact-messages_subtitle{
+  padding: 10px;
+  background: var(--light-black);
+  border-radius: 0 0 10px 10px;
+}
+.contact-messages_describe{
+  color: var(--light-white);
+  font-size: 17px;
+  word-wrap: break-word;
+}
+.contact-messages_btn{
+  margin-top: 90px;
+  text-align: center;
+}
+.found-messages{
+  color: var(--light-white);
+  font-size: 24px;
+  font-style: italic;
+}
+
 @media screen and (max-width: 1810px) {
   .main-project{
     width: 32%;
+  }
+}
+
+@media screen and (max-width:1785px) {
+  .create-portfolio_gain{
+    width: 29.5%;
   }
 }
 
@@ -501,6 +550,19 @@ body::-webkit-scrollbar {
     width: 31.8%;
   }
 }
+
+@media screen and (max-width:1738px) {
+  .create-portfolio_gain{
+    width: 29.3%;
+  }
+}
+
+@media screen and (max-width:1652px) {
+  .create-portfolio_gain{
+    width: 29%;
+  }
+}
+
 
 @media screen and (max-width:1638px) {
   .experience-section_cart{
@@ -519,6 +581,12 @@ body::-webkit-scrollbar {
   }
 }
 
+@media screen and (max-width:1537px) {
+  .create-portfolio_gain{
+    width: 28.8%;
+  }
+}
+
 @media screen and (max-width:1529px) {
   .experience-section_cart{
     width: 31.6%;
@@ -526,6 +594,12 @@ body::-webkit-scrollbar {
 
   .main-project{
     width: 31.8%;
+  }
+}
+
+@media screen and (max-width:1470px) {
+  .create-portfolio_gain{
+    width: 28.5%;
   }
 }
 
@@ -548,9 +622,33 @@ body::-webkit-scrollbar {
   }
 }
 
+@media screen and (max-width:1378px) {
+  .create-portfolio_gain{
+    width: 28.3%;
+  }
+}
+
 @media screen and (max-width:1363px) {
   .experience-section_cart{
     width: 31.3%;
+  }
+}
+
+@media screen and (max-width:1324px) {
+  .create-portfolio_gain{
+    width: 28%;
+  }
+}
+
+@media screen and (max-width:1249px) {
+  .create-portfolio_gain{
+    width: 27.8%;
+  }
+}
+
+@media screen and (max-width:1204px) {
+  .create-portfolio_gain{
+    width: 27.6%;
   }
 }
 
@@ -561,6 +659,24 @@ body::-webkit-scrollbar {
   
   .header-section{
     width: 70%;
+  }
+}
+
+@media screen and (max-width:1162px) {
+  .create-portfolio_gain{
+    width: 27.5%;
+  }
+}
+
+@media screen and (max-width:1142px) {
+  .create-portfolio_gain{
+    width: 27.3%;
+  }
+}
+
+@media screen and (max-width:1104px) {
+  .create-portfolio_gain{
+    width: 45%;
   }
 }
 
@@ -583,6 +699,15 @@ body::-webkit-scrollbar {
     width: 70%;
   }
   .footer-contact_title{
+    text-align: center;
+  }
+}
+
+@media screen and (max-width:1000px) {
+  .content{
+    width: 80%;
+  }
+  .navbar-title{
     text-align: center;
   }
 }
@@ -670,6 +795,12 @@ body::-webkit-scrollbar {
   }
 }
 
+@media screen and (max-width:1652px) {
+  .create-portfolio_gain{
+    width: 100%;
+  }
+}
+
 @media screen and (max-width:613px) {
   .header-section{
     top: 42rem;
@@ -695,6 +826,10 @@ body::-webkit-scrollbar {
   }
   .header-title{
     font-size: 60px;
+  }
+
+  .footer-title{
+    font-size: 35px;
   }
 
   .icon-chevron-thin-right{

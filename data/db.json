@@ -125,6 +125,48 @@
           "text": "xəbərim yoxdu"
         }
       ]
+    },
+    {
+      "id": "a57e",
+      "name": "Murad Gurbanzada",
+      "info": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+      "userName": "Gurbanzman",
+      "githubAcc": "wdfsafgashdg",
+      "linkedinAcc": "WFJKEWFEQWB",
+      "twitterAcc": "FG.JWDFDDEWJFDWEF",
+      "androidAcc": "EWFWEFHWEFJ",
+      "exp": [
+        {
+          "value": "HTML",
+          "check": false,
+          "text": "3 YEARS"
+        },
+        {
+          "value": "CSS",
+          "check": false,
+          "text": "3 YEARS"
+        },
+        {
+          "value": "JavaScript",
+          "check": false,
+          "text": ""
+        },
+        {
+          "value": "Sass",
+          "check": false,
+          "text": ""
+        },
+        {
+          "value": "React",
+          "check": false,
+          "text": "3 YEARS"
+        },
+        {
+          "value": "Accessibility",
+          "check": false,
+          "text": ""
+        }
+      ]
     }
   ]
 }

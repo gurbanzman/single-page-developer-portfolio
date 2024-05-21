@@ -20,42 +20,42 @@ export default function Projects() {
         <div className="main-section_body">
           <div className="main-section_project">
             <ProjectLink
-              img={`/src/images/design-one.png`}
+              img={`/src/assets/images/design-one.png`}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/images/design-one.png`}
+              img={`/src/assets/images/design-one.png`}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/images/design-one.png`}
+              img={`/src/assets/images/design-one.png`}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/images/design-one.png`}
+              img={`/src/assets/images/design-one.png`}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/images/design-one.png`}
+              img={`/src/assets/images/design-one.png`}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/images/design-one.png`}
+              img={`/src/assets/images/design-one.png`}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}

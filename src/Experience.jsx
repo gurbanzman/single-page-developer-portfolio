@@ -9,7 +9,7 @@ export default function Experience({data}) {
       <div className="experience-section_user container">
         <div className="experience-section_carts">
           {data.exp ==undefined? <ExperienceCart name={`HTML`} time={`ed`}/> : data.exp.map((item,index) => {
-            return item.value!=="" || item.text !==""? <ExperienceCart key={index} name={item.value} time={item.text}/> : {}
+            return item.value==="" || item.text ===""? "":<ExperienceCart key={index} name={item.value} time={item.text}/>
           })}
         </div>
       </div>

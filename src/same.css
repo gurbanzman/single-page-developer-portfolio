@@ -44,10 +44,17 @@
 
 
 
-
+/* for flex */
+.contact-messages_title,
 .main-section_title,
 .footer-user {
    display: flex;
    justify-content: space-between;
    align-items: center;
 }
+.contact-section_head,
+.footer-user{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
