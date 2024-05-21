@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ContactBtn from "./layout/ContactBtn";
 import ProjectLink from "./ProjectLink";
+import port from "./assets/images/design-one.png"
 
 export default function Projects() {
   return (
@@ -20,42 +21,42 @@ export default function Projects() {
         <div className="main-section_body">
           <div className="main-section_project">
             <ProjectLink
-              img={`/src/design-one.png`}
+              img={port}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/design-one.png`}
+              img={port}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/design-one.png`}
+              img={port}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/design-one.png`}
+              img={port}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/design-one.png`}
+              img={port}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
               arr={[]}
             />
             <ProjectLink
-              img={`/src/design-one.png`}
+              img={port}
               page={`contact-me`}
               code={`contact-me`}
               name={`Design`}
