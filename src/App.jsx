@@ -1,37 +1,18 @@
-import Footer from "./components/Footer"
-import Navbar from "./components/Navbar"
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import CreatePortfolio from "./pages/CreatePortfolio"
-import Contact from "./pages/Contact"
-import { useEffect, useState } from "react"
+import { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import Loading from "./components/others/loading/index.jsx";
 
+const HomePage = lazy(() => import("./pages/home/index.jsx"));
 function App() {
-  let [data,setData]=useState({})
-  useEffect(()=>{
-    fetch("http://localhost:3000/users_portfolio")
-    .then(response=> response.json())
-    .then(data=> data.find(item=> {
-      if(item.exp){
-        setData(item)
-      }
-      else{
-        setData({...data,exp:[]})
-      }
-    }));
-  },[])
-  
   return (
     <>
-    <Navbar data={data}/>
-      <Routes>
-        <Route path="/" element={<Home data={data}/>} />
-        <Route path="/create-your-own-portfolio" element={<CreatePortfolio />} />
-        <Route path="/contact-me" element={<Contact />} />
-      </Routes>
-      <Footer data={data}/>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Suspense>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
