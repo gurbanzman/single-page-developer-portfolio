@@ -1,64 +1,40 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaXTwitter, FaGitlab } from "react-icons/fa6";
-
 import { MdErrorOutline } from "react-icons/md";
-
-import { Link } from "react-router-dom";
+import customSkillsData from "../../components/main/custom/data/skills/index";
+import customProjectsData from "../../components/main/custom/data/projects/index";
+import { useNavigate, useParams } from "react-router-dom";
+import LinkOrBtn from "../../components/main/ui/button";
 // import images
-import adamkeyes from "/images/avatar/profile.png";
-import primary from "/images/design/primary.png";
-import primaryRight from "/images/design/primarry-right.png";
-import design from "/images/card/card-page.png";
+// import { adamkeyes, primary, primaryRight } from "../../../public/images";
+import CustomSkills from "../../components/main/custom/layout/skills";
+import CustomProjects from "../../components/main/custom/layout/projects";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../../hooks/data";
+import Navbar from "../../components/main/navbar";
+import { isLoggedIn } from "../../hooks/middleware";
+
+const adamkeyes = "../../../../public/images/avatar/profile.png";
 
 function HomePage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  if(!isLoggedIn()){
+    navigate("/");
+  }
+
+  const { data } = useQuery({
+    queryKey: ["user", id],
+    queryFn: () => getUser(id),
+    enabled: !!id,
+  });
+  
+  
+
   return (
     <div className="portfolio">
       {/* navbar */}
       <div className="navbar">
         <div className="flex flex-col gap-5 items-center page-container navbar-content">
-          <h1 className="text-white text-2xl font-bold">adamkeyes</h1>
-          <ul className="flex justify-between items-center w-full">
-            <li>
-              <a
-                href="https://github.com/adamkeyes"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="text-white text-2xl"
-              >
-                <FaGithub />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/adamkeyes"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="text-white text-2xl"
-              >
-                <FaLinkedin />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/adamkeyes"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="text-white text-2xl"
-              >
-                <FaXTwitter />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/adamkeyes"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="text-white text-2xl"
-              >
-                <FaGitlab />
-              </a>
-            </li>
-          </ul>
+          <Navbar data={data} />
         </div>
       </div>
       {/* main */}
@@ -67,31 +43,46 @@ function HomePage() {
         <div className="flex main-text main-bottom relative">
           <div className="main-image page-container flex justify-end items-end">
             <figure className="w-full user-profile">
-              <img src={adamkeyes} alt="profile.png" className="reset-image" />
+              <img
+                src={data ? data.data.profileImage : adamkeyes}
+                alt="profile.png"
+                className="reset-image"
+              />
             </figure>
           </div>
           <div className="main-user flex">
             <h1 className="main-user-title">
               Nice to meet you! I’m{" "}
               <span className="main-user-title-name border-b-3 border-lightGreen">
-                Adam Keyes
+                {data ? data.data.fullName : "adamkeyes"}
               </span>
               .
             </h1>
             <p className="main-user-desc">
-              Based in the UK, I’m a front-end developer passionate about
-              building accessible web apps that users love.
+              {data
+                ? data.data.description
+                : "Based in the UK, I’m a front-end developer passionate about building accessible web apps that users love."}
             </p>
-            <Link to={`#`} className="main-user-link block">
-              Contact ME
-            </Link>
+            {id ? (
+              ''
+            ) : (
+              <LinkOrBtn
+                variant="link"
+                link="/create-user"
+                linkText="Create User"
+              />
+            )}
           </div>
-          <div className="absolute w-9/12 max-w-[250px] top-15 left-0 absolute-pri-left">
+          <div className="absolute w-9/12 max-w-[250px] top-15 z-[-1] left-0 absolute-pri-left">
             <figure>
-              <img src={primary} alt="primary.png" className="reset-image" />
+              <img
+                src={"../../public/images/design/primary.png"}
+                alt="primary.png"
+                className="reset-image"
+              />
             </figure>
           </div>
-          <div className="absolute top-[13rem] right-0 w-16 absolute-circle">
+          <div className="absolute top-[13rem] right-0 w-16 absolute-circle z-[-1]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="64"
@@ -106,28 +97,11 @@ function HomePage() {
         </div>
         {/* skills */}
         <div className="skills main-bottom relative m-auto">
-          <ul className="skills-list flex">
-            <li className="skills-list-item flex flex-col">
-              <span className="skills-list-item-head text-white">HTML</span>
-              <span className="skills-list-item-body">4 Years Experience</span>
-            </li>
-            <li className="skills-list-item flex flex-col">
-              <span className="skills-list-item-head text-white">HTML</span>
-              <span className="skills-list-item-body">4 Years Experience</span>
-            </li>
-            <li className="skills-list-item flex flex-col">
-              <span className="skills-list-item-head text-white">HTML</span>
-              <span className="skills-list-item-body">4 Years Experience</span>
-            </li>
-            <li className="skills-list-item flex flex-col">
-              <span className="skills-list-item-head text-white">HTML</span>
-              <span className="skills-list-item-body">4 Years Experience</span>
-            </li>
-          </ul>
-          <div className="absolute w-9/12 max-w-[250px] bottom-[-5rem] right-0 absolute-pri-right">
+          <CustomSkills data={data ? data.data.skills : customSkillsData} />
+          <div className="absolute w-9/12 max-w-[250px] z-[-1] bottom-[-5rem] right-0 absolute-pri-right">
             <figure>
               <img
-                src={primaryRight}
+                src={"../../../public/images/design/primarry-right.png"}
                 alt="primaryRight.png"
                 className="reset-image"
               />
@@ -138,191 +112,20 @@ function HomePage() {
         <div className="projects main-bottom">
           <div className="flex items-center justify-between">
             <h1 className="text-white font-bold projects-title">Projects</h1>
-            <p>
-              <Link to={`#`} className="main-user-link block">
-                Create
-              </Link>
-            </p>
+            {id ? (
+              <p>
+                <LinkOrBtn
+                  variant="link"
+                  link="/added-project/123"
+                  linkText="Added"
+                />
+              </p>
+            ) : (
+              ""
+            )}
           </div>
           <div className="projects-list-container">
-            <ul className="projects-list flex flex-wrap">
-              <li className="projects-list-item">
-                <figure className="projects-list-item-image relative">
-                  <img src={design} alt="design.png" className="reset-image" />
-                  <p className="projects-list-item-links flex justify-between items-center desktop-projects-link">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </figure>
-                <div className="projects-list-item-body">
-                  <ul className="projects-list-item-skills flex flex-col gap-2">
-                    <li className="skills-list-item flex flex-col gap-2">
-                      <span className="skills-list-item-head skills--list text-white">
-                        DESIGN PORTFOLIO
-                      </span>
-                    </li>
-                    <li className="skills-list-item flex items-center gap-3 flex-wrap">
-                      <span className="skills-list-item-body skills--list">
-                        HTML
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        Javascript
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="projects-list-item-links flex justify-between items-center">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </div>
-              </li>
-              <li className="projects-list-item">
-                <figure className="projects-list-item-image relative">
-                  <img src={design} alt="design.png" className="reset-image" />
-                  <p className="projects-list-item-links flex justify-between items-center desktop-projects-link">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </figure>
-                <div className="projects-list-item-body">
-                  <ul className="projects-list-item-skills flex flex-col gap-2">
-                    <li className="skills-list-item flex flex-col gap-2">
-                      <span className="skills-list-item-head skills--list text-white">
-                        DESIGN PORTFOLIO
-                      </span>
-                    </li>
-                    <li className="skills-list-item flex items-center gap-3 flex-wrap">
-                      <span className="skills-list-item-body skills--list">
-                        HTML
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        Javascript
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="projects-list-item-links flex justify-between items-center">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </div>
-              </li>
-              <li className="projects-list-item">
-                <figure className="projects-list-item-image relative">
-                  <img src={design} alt="design.png" className="reset-image" />
-                  <p className="projects-list-item-links flex justify-between items-center desktop-projects-link">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </figure>
-                <div className="projects-list-item-body">
-                  <ul className="projects-list-item-skills flex flex-col gap-2">
-                    <li className="skills-list-item flex flex-col gap-2">
-                      <span className="skills-list-item-head skills--list text-white">
-                        DESIGN PORTFOLIO
-                      </span>
-                    </li>
-                    <li className="skills-list-item flex items-center gap-3 flex-wrap">
-                      <span className="skills-list-item-body skills--list">
-                        HTML
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        Javascript
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="projects-list-item-links flex justify-between items-center">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </div>
-              </li>
-              <li className="projects-list-item">
-                <figure className="projects-list-item-image relative">
-                  <img src={design} alt="design.png" className="reset-image" />
-                  <p className="projects-list-item-links flex justify-between items-center desktop-projects-link">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </figure>
-                <div className="projects-list-item-body">
-                  <ul className="projects-list-item-skills flex flex-col gap-2">
-                    <li className="skills-list-item flex flex-col gap-2">
-                      <span className="skills-list-item-head skills--list text-white">
-                        DESIGN PORTFOLIO
-                      </span>
-                    </li>
-                    <li className="skills-list-item flex items-center gap-3 flex-wrap">
-                      <span className="skills-list-item-body skills--list">
-                        HTML
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        Javascript
-                      </span>
-                      <span className="skills-list-item-body skills--list">
-                        CSS
-                      </span>
-                    </li>
-                  </ul>
-                  <p className="projects-list-item-links flex justify-between items-center">
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW PROJECT
-                    </Link>
-                    <Link to={`#`} className="main-user-link block">
-                      VIEW CODE
-                    </Link>
-                  </p>
-                </div>
-              </li>
-            </ul>
+            <CustomProjects data={customProjectsData} />
           </div>
         </div>
       </div>
@@ -387,15 +190,21 @@ function HomePage() {
                   </div>
                 </div>
                 <div className="flex justify-end input-content m-auto">
-                  <Link to={`#`} className="main-user-link block">
-                    Send Message
-                  </Link>
+                  <LinkOrBtn
+                    variant="btn"
+                    type="submit"
+                    btnText="Send Message"
+                  />
                 </div>
               </div>
             </form>
-            <div className="absolute w-9/12 max-w-[250px] bottom-10 left-0 absolute-pri-left">
+            <div className="absolute w-9/12 max-w-[250px] z-[-1] bottom-10 left-0 absolute-pri-left">
               <figure className="absolute-pri-left">
-                <img src={primary} alt="primary.png" className="reset-image" />
+                <img
+                  src={"../../public/images/design/primary.png"}
+                  alt="primary.png"
+                  className="reset-image"
+                />
               </figure>
             </div>
           </div>
@@ -404,49 +213,7 @@ function HomePage() {
         <div className="footer-menu">
           <div className="footer-menu-content m-auto">
             <div className="flex flex-col gap-5 items-center page-container navbar-content">
-              <h1 className="text-white text-2xl font-bold">adamkeyes</h1>
-              <ul className="flex justify-between items-center w-full">
-                <li>
-                  <a
-                    href="https://github.com/adamkeyes"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="text-white text-2xl"
-                  >
-                    <FaGithub />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/adamkeyes"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="text-white text-2xl"
-                  >
-                    <FaLinkedin />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/adamkeyes"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="text-white text-2xl"
-                  >
-                    <FaXTwitter />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/adamkeyes"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="text-white text-2xl"
-                  >
-                    <FaGitlab />
-                  </a>
-                </li>
-              </ul>
+              <Navbar data={data} />
             </div>
           </div>
         </div>

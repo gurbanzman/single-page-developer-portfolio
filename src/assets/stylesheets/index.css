@@ -32,6 +32,10 @@ body {
    overflow-x: hidden;
 }
 
+button{
+   cursor: pointer;
+}
+
 .page-container {
    width: 50%;
    margin: auto;
@@ -81,6 +85,8 @@ body {
 
    .user-profile {
       max-width: 200px;
+      max-height: 260px;
+      overflow-y: hidden;
    }
 
    .main-text {
@@ -150,6 +156,9 @@ body {
       font-weight: 700;
       line-height: 40px;
       letter-spacing: -1px;
+   }
+   .skills-list-span{
+      font-size: 20px;
    }
 
    .skills-list-item-body {
@@ -252,9 +261,54 @@ body {
       border-top: 1px solid var(--color-white);
       width: 95%;
    }
-   .footer-content .main-user-desc{
+
+   .footer-content .main-user-desc {
       text-align: center;
    }
+   /* create user page */
+   .create-user{
+      padding: 30px 0;
+   }
+   .create-head{
+      font-size: 25px;
+      text-align: center;
+      margin-bottom: 50px;
+   }
+   .skills-container{
+      padding: 0px 0 20px 10px;
+      align-items: flex-start;
+   }
+   .your-skills-list{
+      margin-top: 20px;
+   }
+   .your-skills-option{
+      border: 1px solid var(--color-gray);
+      padding: 10px;
+      border-radius: 4px;
+      color: var(--color-lightWhite);
+   }
+   .your-skill,
+   .your-skill-period{
+      font-size: 17px;
+   }
+   .remove-btn > button{
+      font-size: 21px;
+   }
+   .contact-select{
+      background: var(--color-gray);
+      border-radius: 4px;
+      margin-top: 10px;
+   }
+   .contact-select > option{
+      padding: 10px;
+      border-bottom: 2px solid var(--color-dark);
+   }
+   .contact-select > option:last-of-type{
+      border-bottom: 0;
+   }
+
+   
+   
 }
 
 /* media queries tablet */
@@ -264,6 +318,11 @@ body {
       flex-wrap: wrap;
       column-gap: 20px;
       justify-content: space-between;
+   }
+   /* create user */
+   .your-skill,
+   .your-skill-period{
+      font-size: 18px;
    }
 }
 
@@ -319,6 +378,7 @@ body {
 
    .user-profile {
       max-width: 300px;
+      max-height: 380px;
    }
 
    .main-user {
@@ -367,31 +427,37 @@ body {
 
 /* media queries desktop */
 @media all and (min-width: 1254px) {
-   .main-text{
+   .main-text {
       justify-content: space-between;
    }
+
    .main-text,
    .skills,
-   .projects{
+   .projects {
       padding: 10px 0 80px 0;
       width: 80%;
       margin: auto;
    }
-   .navbar-content{
+
+   .navbar-content {
       width: 80%;
    }
+
    .skills,
-   .projects{
+   .projects {
       margin: 50px auto;
    }
-   .skills .skills-list-item{
+
+   .skills .skills-list-item {
       align-items: flex-start;
       width: 30%;
    }
-   .projects-list-item .projects-list-item-links{
+
+   .projects-list-item .projects-list-item-links {
       display: none;
    }
-   .projects-list-item-image:hover .projects-list-item-links{
+
+   .projects-list-item-image:hover .projects-list-item-links {
       display: block;
       position: absolute;
       inset: 0;
@@ -405,24 +471,134 @@ body {
       justify-content: center;
       align-items: center;
    }
+
    .footer-content,
    .input-content {
       max-width: 40%;
    }
+
    .absolute-pri-left,
-   .absolute-pri-right{
+   .absolute-pri-right {
       display: none;
    }
-   .skills-list{
+
+   .skills-list {
       row-gap: 40px;
    }
-   .main-image{
+
+   .main-image {
       margin: 0;
    }
 }
 
 @media all and (min-width:1522px) {
-   .absolute-circle{
+   .absolute-circle {
       display: none;
+   }
+}
+
+/* loading styles */
+.loading {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
+.loading-circle {
+   height: 9rem;
+   width: 9rem;
+   border-radius: 50%;
+
+   box-shadow: -.3rem -.3rem 3rem rgba(255, 255, 255, .4),
+      -.3rem -.3rem .3rem rgba(255, 255, 255, .4),
+      .3rem .3rem .3rem rgba(25, 25, 25, .4), .3rem .3rem .3rem rgba(25, 25, 25, 0) inset;
+   cursor: pointer;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   color: #333;
+   font-weight: 100;
+   transition: .3s box-shadow;
+   box-sizing: border-box;
+   padding: 0.5rem;
+
+}
+
+.loading-circle:active {
+   box-shadow: 0rem -.3rem 3rem rgba(255, 255, 255, .4),
+      -.0rem -.3rem .3rem rgba(255, 255, 255, .4),
+      0rem .3rem .3rem rgba(255, 255, 255, .4), 0rem .3rem .3rem rgba(25, 25, 25, .4) inset;
+   transition: .3s all;
+}
+
+.inner-loading {
+   box-sizing: border-box;
+   width: 100%;
+   height: 100%;
+   background-color: transparent;
+   border-radius: 50%;
+   box-sizing: border-box;
+   border: .18rem dotted #008EF4;
+   border-color: #888;
+   will-change: border-color, filter, transform;
+   border-color: #008EF4;
+   transition: .3s all;
+   border-style: dashed;
+
+   animation: 15s loadingAnim infinite linear;
+   padding: 1rem;
+
+}
+
+.loading-circle:active .inner-loading {
+   border-color: #008EF4;
+   filter: hue-rotate(-50deg) !important;
+   transition: .3s all;
+}
+
+/* using ::after was taking more cpu */
+.after {
+   width: 100%;
+   height: 100%;
+   background-color: #e3e3e4;
+   border-radius: 50%;
+   box-shadow: -.3rem -.3rem 3rem rgba(255, 255, 255, .4),
+      -.3rem -.3rem .3rem rgba(255, 255, 255, .4),
+      .3rem .3rem .3rem rgba(25, 25, 25, .4), .3rem .3rem .3rem rgba(25, 25, 25, 0) inset;
+   /* That one is just for removing the inner circle's movement */
+   -webkit-animation: 15s loadingAnim infinite reverse linear;
+   animation: 15s loadingAnim infinite reverse linear;
+   will-change: border-color, filter, transform;
+   transition: .5s box-shadow;
+   filter: none;
+   transform: rotate(0deg);
+}
+
+.after:active {
+   box-shadow: 0rem -.3rem 3rem rgba(255, 255, 255, .4),
+      -.0rem -.3rem .3rem rgba(255, 255, 255, .4),
+      0rem .3rem .3rem rgba(255, 255, 255, .4), 0rem .3rem .3rem rgba(25, 25, 25, .4) inset;
+}
+
+@keyframes loadingAnim {
+   50% {
+      filter: hue-rotate(360deg);
+   }
+
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+@-webkit-keyframes loadingAnim {
+   50% {
+      filter: hue-rotate(360deg);
+   }
+
+   100% {
+      transform: rotate(360deg);
    }
 }

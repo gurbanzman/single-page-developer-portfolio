@@ -60,3 +60,20 @@
       width: 100%;
    }
 }
+
+
+if (isDublicate != -1) {
+      const updatedArr = arr.splice(isDublicate,1);
+      setArr(updatedArr);
+      // const updatedArr = arr.findIndex((item) => {
+      //   item.skill_name === skills.skill_name &&
+      //     item.skill_period === skills.skill_period;
+      // });
+      console.log(true);
+      
+      // setArr(updatedArr);
+    } else {
+      console.log(false);
+      
+      setArr([...arr, skills]);
+    }
