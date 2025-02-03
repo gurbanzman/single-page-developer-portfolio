@@ -1,15 +1,28 @@
 import { MdErrorOutline } from "react-icons/md";
 import LinkOrBtn from "../../components/main/ui/button";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { handleChange } from "../../utils/handleChange";
+import { customHandleChange, handleFileChange } from "../../utils/handleChange";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { useNavigate, useParams } from "react-router-dom";
+import { addProject } from "../../hooks/data";
 
 function AddedProjectPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   // for skills
   const [skills, setSkills] = useState({
     skills: "HTML",
   });
   const [arr, setArr] = useState([]);
+  const [projectImage, setProjectImage] = useState("");
+  const [basicInfo, setBasicInfo] = useState({
+    projectName: "",
+    domainURL: "",
+    githubURL: "",
+  });
 
   const handleClick = () => {
     setArr([...arr, skills]);
@@ -24,6 +37,39 @@ function AddedProjectPage() {
     newArr.splice(index, 1);
     setArr(newArr);
   };
+
+  const mutation = useMutation({
+    mutationFn: addProject,
+    onSuccess: (data) => {
+      toast.success("Project added successfully!");
+      navigate("/" + id);
+      console.log(data.data);
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to add user.");
+    },
+  });
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!projectImage) {
+      toast.warning("Please upload your project image");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+
+      formData.append("projectImage", projectImage);
+      formData.append("projectName", basicInfo.projectName);
+      formData.append("githubURL", basicInfo.githubURL);
+      formData.append("domainURL", basicInfo.domainURL);
+      formData.append("userID", id);
+      formData.append("skills", JSON.stringify(arr));
+      mutation.mutate(formData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div className="create-user">
       <div className="create-head">
@@ -31,7 +77,11 @@ function AddedProjectPage() {
           Added Project
         </h1>
       </div>
-      <form action="" className="flex flex-col gap-8">
+      <form
+        method="POST"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-8"
+      >
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-8 input-content m-auto">
             {/* basic info */}
@@ -44,7 +94,9 @@ function AddedProjectPage() {
                 name="projectName"
                 id="projectName"
                 placeholder="projectName"
+                onChange={(e) => customHandleChange(e, basicInfo, setBasicInfo)}
                 className="contact-input text-white outline-none w-11/12"
+                required
               />
               <p className="error-msg">
                 <MdErrorOutline />
@@ -56,11 +108,13 @@ function AddedProjectPage() {
               data-wrong="Sorry, invalid format here"
             >
               <input
-                type="text"
+                type="url"
                 name="githubURL"
                 id="githubURL"
                 placeholder="githubURL"
+                onChange={(e) => customHandleChange(e, basicInfo, setBasicInfo)}
                 className="contact-input text-white outline-none w-11/12"
+                required
               />
               <p className="error-msg">
                 <MdErrorOutline />
@@ -71,11 +125,13 @@ function AddedProjectPage() {
               data-wrong="Sorry, invalid format here"
             >
               <input
-                type="text"
+                type="url"
                 name="domainURL"
                 id="domainURL"
                 placeholder="domainURL or websiteURL"
+                onChange={(e) => customHandleChange(e, basicInfo, setBasicInfo)}
                 className="contact-input text-white outline-none w-11/12"
+                required
               />
               <p className="error-msg">
                 <MdErrorOutline />
@@ -92,6 +148,7 @@ function AddedProjectPage() {
                 id="profileImage"
                 placeholder="profileImage"
                 className="contact-input text-white outline-none w-11/12"
+                onChange={(e) => handleFileChange(e, setProjectImage)}
               />
               <p className="error-msg">
                 <MdErrorOutline />
@@ -108,7 +165,7 @@ function AddedProjectPage() {
                   <select
                     name="skills"
                     className="contact-input text-white outline-none w-full contact-select block"
-                    onChange={(e) => handleChange(e, skills, setSkills)}
+                    onChange={(e) => customHandleChange(e, skills, setSkills)}
                   >
                     <option value="HTML">HTML</option>
                     <option value="CSS">CSS</option>

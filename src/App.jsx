@@ -5,6 +5,7 @@ import Loading from "./components/others/loading/index.jsx";
 const HomePage = lazy(() => import("./pages/home/index.jsx"));
 const CreateUserPage = lazy(() => import("./pages/create-user/index.jsx"));
 const AddedProjectPage = lazy(() => import("./pages/added-project/index.jsx"));
+const MessagesPage = lazy(() => import("./pages/messages/index.jsx"));
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/:id" element={<HomePage />} />
           <Route path="/create-user" element={<CreateUserPage />} />
           <Route path="/added-project/:id" element={<AddedProjectPage />} />
+          <Route path="/messages/:id" element={<MessagesPage />} />
           <Route path="*" element={<p>Page not found</p>} />
         </Routes>
       </Suspense>

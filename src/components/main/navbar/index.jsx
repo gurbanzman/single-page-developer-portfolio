@@ -1,12 +1,14 @@
 import { FaGithub, FaGitlab, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { Link, useParams } from "react-router-dom";
 
-function Navbar({data}) {
+function Navbar({data,messages}) {
+  const {id} = useParams();
   return (
     <>
-      <h1 className="text-white text-2xl font-bold">
-        {data && data.data.username || "adamkeyes"}
-      </h1>
+      <Link to={id ? `/messages/${id}` : "/"} title="when clicked, it will take you to your messages" className="block text-white text-2xl font-bold">
+        {data && data.data.username || "adamkeyes"} {messages && messages.length > 0 ? <sup>inbox: {messages.length}</sup> : ""}
+      </Link>
       <ul className="flex justify-between items-center w-full">
         <li>
           <a

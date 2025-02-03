@@ -8,10 +8,10 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  server: {
-    proxy: {
-      "/api": import.meta.env.VITE_BACKEND, // Proxy API requests to the backend
-      "/images": import.meta.env.VITE_BACKEND, // Proxy image requests to the backend
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": "http://localhost:3000", // Proxy API requests to the backend
+  //     "/images": "http://localhost:3000", // Proxy image requests to the backend
+  //   },
+  // },
 });
